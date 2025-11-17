@@ -107,10 +107,18 @@
           const stations = GameState.getAllStations();
           GridView.renderGrid(stations);
           
+          // Attach grid click listeners
+          GridView.attachGridListeners(SegmentController.handleStationClick);
+          
           // Update game info
           updateGameInfo();
           
-          // TODO: Attach game event listeners
+          // Highlight starting endpoints
+          const currentLine = GameState.getCurrentLine();
+          if (currentLine) {
+            GridView.highlightEndpoints(currentLine.getEndpoints());
+          }
+          
           console.log('Game initialized successfully!');
         } else {
           console.error('Failed to initialize game');
