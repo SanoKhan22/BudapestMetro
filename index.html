@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budapest Metrói - Metro Building Game</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/grid.css">
+</head>
+<body>
+  
+  <!-- Menu Screen -->
+  <div id="menu-screen" class="screen">
+    <div class="menu-container">
+      <h1 class="menu-title">Budapest Metrói</h1>
+      
+      <div class="menu-form">
+        <input type="text" id="player-name-input" class="name-input" placeholder="Enter your name" maxlength="30">
+        <button id="start-game-btn" class="menu-button">Játék indítása</button>
+        <button id="rules-btn" class="menu-button secondary">Szabályok</button>
+        <button id="leaderboard-btn" class="menu-button secondary">Leaderboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules Modal -->
+  <div id="rules-modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="close-rules-btn" class="close-btn">&times;</button>
+      <h2>Game Rules</h2>
+      <div class="rules-content">
+        <h3>How to Play:</h3>
+        <p>Build 4 metro lines (M1, M2, M3, M4) across Budapest's 10×10 grid.</p>
+        
+        <h3>Controls:</h3>
+        <ul>
+          <li><strong>Draw Card:</strong> Click "Draw Card" button</li>
+          <li><strong>Build Segment:</strong> Click starting station, then click target station</li>
+          <li><strong>Skip Turn:</strong> Click "Skip" to draw next card without building</li>
+        </ul>
+        
+        <h3>Rules:</h3>
+        <ul>
+          <li>Segments must be at 90° or 45° angles</li>
+          <li>Cannot intersect other segments (except at stations)</li>
+          <li>Cannot pass through intermediate stations</li>
+          <li>Cannot revisit stations on same line (no loops)</li>
+          <li>Only one segment between any two stations</li>
+        </ul>
+        
+        <h3>Scoring:</h3>
+        <ul>
+          <li><strong>Round:</strong> (Districts × Max in District) + Danube Crossings</li>
+          <li><strong>Railway:</strong> Points for visiting train stations</li>
+          <li><strong>Junctions:</strong> 2pts (2 lines), 5pts (3 lines), 9pts (4 lines)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard Modal -->
+  <div id="leaderboard-modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="close-leaderboard-btn" class="close-btn">&times;</button>
+      <h2>Leaderboard</h2>
+      <div id="leaderboard-content" class="leaderboard-content">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="screen hidden">
+    <div class="game-layout">
+      
+      <!-- Left: Game Grid -->
+      <div class="grid-section">
+        <div class="game-header">
+          <div class="player-info">
+            <span class="label">Player:</span>
+            <span id="player-name-display" class="value">-</span>
+          </div>
+          <div class="timer-info">
+            <span class="label">Time:</span>
+            <span id="timer-display" class="value">00:00</span>
+          </div>
+          <div class="line-info">
+            <span class="label">Line:</span>
+            <span id="current-line-display" class="value">-</span>
+          </div>
+        </div>
+        
+        <div id="grid-container" class="grid-container">
+          <!-- Grid populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Right: Info Panel -->
+      <div class="info-panel">
+        
+        <!-- Current Card -->
+        <div class="card-section">
+          <h3>Current Card</h3>
+          <div id="card-display" class="card-display">
+            <div class="card-placeholder">Draw a card to start</div>
+          </div>
+          <div class="card-actions">
+            <button id="draw-card-btn" class="btn btn-primary">Draw Card</button>
+            <button id="skip-card-btn" class="btn btn-secondary">Skip</button>
+          </div>
+        </div>
+
+        <!-- Round Info -->
+        <div class="round-section">
+          <h3>Round <span id="round-number">1</span>/4</h3>
+          <div id="round-order-display" class="round-order">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Scoring Panel -->
+        <div class="scoring-section">
+          <h3>Scoring</h3>
+          <div id="score-display" class="score-display">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="game-actions">
+          <button id="end-round-btn" class="btn btn-secondary hidden">End Round</button>
+          <button id="back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Files (Load in order) -->
+  <script src="js/constants.js"></script>
+  <script src="js/models/Station.js"></script>
+  <script src="js/models/Card.js"></script>
+  <script src="js/models/MetroLine.js"></script>
+  <script src="js/models/GameState.js"></script>
+  <script src="js/utils/geometry.js"></script>
+  <script src="js/utils/validation.js"></script>
+  <script src="js/utils/scoring.js"></script>
+  <script src="js/utils/storage.js"></script>
+  <script src="js/controllers/CardController.js"></script>
+  <script src="js/controllers/SegmentController.js"></script>
+  <script src="js/controllers/GameController.js"></script>
+  <script src="js/views/MenuView.js"></script>
+  <script src="js/views/GridView.js"></script>
+  <script src="js/views/ScoreView.js"></script>
+  <script src="js/views/GameView.js"></script>
+  <script src="js/app.js"></script>
+
+  💙
+</body>
+</html>
