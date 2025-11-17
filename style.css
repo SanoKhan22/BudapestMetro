@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat .label {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat .value {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+#game-area {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    min-height: 400px;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#start-screen {
+    text-align: center;
+}
+
+#start-screen h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+#start-screen p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.difficulty-selector {
+    margin-top: 30px;
+}
+
+.difficulty-selector h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: 20px 0;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-difficulty {
+    background: #f0f0f0;
+    color: #666;
+    margin: 0 10px;
+}
+
+.btn-difficulty.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-difficulty:hover {
+    transform: translateY(-2px);
+}
+
+.question-card {
+    animation: slideIn 0.5s;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.line-indicator {
+    margin-bottom: 20px;
+}
+
+.line-indicator span {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#question-text {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 1.5em;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    padding: 20px;
+    font-size: 1.1em;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option-btn:hover:not(:disabled) {
+    background: #f8f8f8;
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+}
+
+.option-btn.correct {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+    animation: pulse 0.5s;
+}
+
+.option-btn.incorrect {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+    animation: shake 0.5s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.feedback {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.feedback.correct {
+    background: #e8f5e9;
+    color: #4caf50;
+}
+
+.feedback.incorrect {
+    background: #ffebee;
+    color: #f44336;
+}
+
+#result-screen {
+    text-align: center;
+}
+
+#result-screen h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.result-stats {
+    background: #f8f8f8;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.result-stats p {
+    margin: 15px 0;
+    font-size: 1.3em;
+}
+
+.result-stats span {
+    font-weight: bold;
+    color: #667eea;
+}
+
+#performance-message {
+    font-size: 1.5em;
+    color: #764ba2;
+    margin-top: 20px;
+}
+
+.metro-info {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.metro-info h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.metro-lines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.line {
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid;
+}
+
+.line.m1 {
+    border-left-color: #FFD800;
+    background: #fffbeb;
+}
+
+.line.m2 {
+    border-left-color: #E62E2D;
+    background: #fff5f5;
+}
+
+.line.m3 {
+    border-left-color: #2C58A0;
+    background: #eff6ff;
+}
+
+.line.m4 {
+    border-left-color: #009150;
+    background: #f0fdf4;
+}
+
+.line strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.line p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    
+    #game-area {
+        padding: 20px;
+    }
+    
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn-difficulty {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
