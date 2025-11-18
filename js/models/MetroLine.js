@@ -1,4 +1,4 @@
-/* Metro Line Model */
+
 
 class MetroLine {
   constructor(data) {
@@ -31,21 +31,15 @@ class MetroLine {
    * @param {number} toId - Target station ID
    */
   updateEndpoints(fromId, toId) {
-    // Remove fromId if it was an endpoint (unless it's a branch point)
     const fromIndex = this.endpoints.indexOf(fromId);
     if (fromIndex > -1) {
-      // Check if fromId is used in multiple segments (branch point)
       const segmentsFromStation = this.segments.filter(
         seg => seg.from === fromId || seg.to === fromId
       );
-      
-      // If only used in one segment (the one we just added), remove as endpoint
       if (segmentsFromStation.length === 1) {
         this.endpoints.splice(fromIndex, 1);
       }
     }
-    
-    // Add toId as new endpoint if not already there
     if (!this.endpoints.includes(toId)) {
       this.endpoints.push(toId);
     }

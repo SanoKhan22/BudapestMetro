@@ -1,19 +1,14 @@
-/* Game State Model - Central state management */
+
 
 const GameState = (function() {
-  // Private state
   let state = {
     playerName: '',
     startTime: null,
     elapsedTime: 0,
     timerInterval: null,
-    
-    // Round management
     roundOrder: [], // Randomized order of metro line IDs [0,1,2,3]
     currentRoundIndex: 0,
     currentLineId: null,
-    
-    // Card system
     deck: [],
     currentCard: null,
     drawnCards: {
@@ -21,22 +16,14 @@ const GameState = (function() {
       centerPlatform: 0
     },
     switchActive: false,
-    
-    // Grid and stations
     stations: [], // Array of Station objects
     metroLines: [], // Array of MetroLine objects
-    
-    // Scoring
     roundScores: [],
     railwayStationCount: 0,
     finalScore: 0,
-    
-    // Extra features
     gameMode: CONSTANTS.GAME_MODES.SIMPLE,
     abilities: {} // Map of lineId -> ability
   };
-  
-  // Public API
   return {
     /**
      * Initialize new game
@@ -63,9 +50,7 @@ const GameState = (function() {
       state.abilities = {};
     },
     
-    /**
-     * Start the game timer
-     */
+    
     startTimer() {
       state.startTime = Date.now();
       state.timerInterval = setInterval(() => {
@@ -73,9 +58,7 @@ const GameState = (function() {
       }, 1000);
     },
     
-    /**
-     * Stop the game timer
-     */
+    
     stopTimer() {
       if (state.timerInterval) {
         clearInterval(state.timerInterval);
@@ -167,20 +150,17 @@ const GameState = (function() {
       if (!currentLine) return;
       
       currentLine.addSegment(fromId, toId);
-      
-      // Update station visited status
       const fromStation = this.getStationById(fromId);
       const toStation = this.getStationById(toId);
       
       if (fromStation) fromStation.addVisitor(state.currentLineId);
       if (toStation) toStation.addVisitor(state.currentLineId);
-      
-      // Check if railway station
-      if (toStation && toStation.train && !state.railwayStationCount) {
-        state.railwayStationCount = 0;
-      }
       if (toStation && toStation.train) {
-        state.railwayStationCount++;
+        const alreadyCounted = toStation.visitedBy.length > 1;
+        if (!alreadyCounted) {
+          state.railwayStationCount++;
+          console.log(`Railway station visited! Total: ${state.railwayStationCount}`);
+        }
       }
     },
     
@@ -220,9 +200,7 @@ const GameState = (function() {
       }
     },
     
-    /**
-     * Reset drawn cards count
-     */
+    
     resetDrawnCards() {
       state.drawnCards = { sidePlatform: 0, centerPlatform: 0 };
     },
@@ -283,9 +261,7 @@ const GameState = (function() {
       return state.currentLineId;
     },
     
-    /**
-     * Move to next round
-     */
+    
     nextRound() {
       state.currentRoundIndex++;
       if (state.currentRoundIndex < state.roundOrder.length) {

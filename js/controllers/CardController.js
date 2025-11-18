@@ -1,10 +1,8 @@
-/* Card Controller - Card drawing and deck management */
+
 
 const CardController = (function() {
   
-  /**
-   * Initialize and shuffle deck
-   */
+  
   function initializeDeck() {
     const deck = CONSTANTS.DECK_COMPOSITION.map(cardData => 
       new Card(cardData.type, cardData.platformType)
@@ -44,47 +42,31 @@ const CardController = (function() {
       console.warn('Deck is empty');
       return null;
     }
-    
-    // Draw card from deck
     const card = deck.shift();
     GameState.setDeck(deck);
     GameState.setCurrentCard(card);
-    
-    // Track drawn cards
     GameState.incrementDrawnCards(card.platformType);
-    
-    // Check if it's a Switch card
     if (card.isSwitch()) {
       handleSwitchCard();
     }
-    
-    // Check round end condition
     GameController.handleRoundEndCondition();
     
     return card;
   }
   
-  /**
-   * Handle Switch card - auto-draw second card
-   */
+  
   function handleSwitchCard() {
     GameState.setSwitchActive(true);
-    
-    // Auto-draw second card
     const deck = GameState.getDeck();
     if (deck.length > 0) {
       const secondCard = deck.shift();
       GameState.setDeck(deck);
       GameState.setCurrentCard(secondCard);
-      
-      // Track the second card
       GameState.incrementDrawnCards(secondCard.platformType);
     }
   }
   
-  /**
-   * Reset deck for new round
-   */
+  
   function resetDeck() {
     return initializeDeck();
   }
@@ -104,8 +86,6 @@ const CardController = (function() {
   function isDeckEmpty() {
     return GameState.getDeck().length === 0;
   }
-  
-  // Public API
   return {
     initializeDeck,
     shuffleDeck,

@@ -1,4 +1,4 @@
-/* Local Storage Utility */
+
 
 const StorageUtil = (function() {
   /**
@@ -15,8 +15,6 @@ const StorageUtil = (function() {
       return false;
     }
   }
-  
-  // Public API
   return {
     /**
      * Save game result to localStorage
@@ -41,11 +39,7 @@ const StorageUtil = (function() {
         };
         
         results.push(newResult);
-        
-        // Sort by score (descending)
         results.sort((a, b) => b.score - a.score);
-        
-        // Keep only top 50 results
         const topResults = results.slice(0, 50);
         
         localStorage.setItem(
@@ -78,9 +72,7 @@ const StorageUtil = (function() {
       }
     },
     
-    /**
-     * Clear all saved game results
-     */
+    
     clearGameResults() {
       if (!isLocalStorageAvailable()) {
         return;

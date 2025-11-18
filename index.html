@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budapest Metrói - Metro Building Game</title>
+  <title>Budapest metro - Metro Building Game</title>
   
-  <!-- CSS Files -->
+  
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/menu.css">
   <link rel="stylesheet" href="css/game.css">
@@ -13,21 +13,21 @@
 </head>
 <body>
   
-  <!-- Menu Screen -->
+  
   <div id="menu-screen" class="screen">
     <div class="menu-container">
-      <h1 class="menu-title">Budapest Metrói</h1>
+      <h1 class="menu-title">Budapest Metro by -Ehsanullah</h1>
       
       <div class="menu-form">
         <input type="text" id="player-name-input" class="name-input" placeholder="Enter your name" maxlength="30">
-        <button id="start-game-btn" class="menu-button">Játék indítása</button>
-        <button id="rules-btn" class="menu-button secondary">Szabályok</button>
+        <button id="start-game-btn" class="menu-button">Start Game</button>
+        <button id="rules-btn" class="menu-button secondary">Rules</button>
         <button id="leaderboard-btn" class="menu-button secondary">Leaderboard</button>
       </div>
     </div>
   </div>
 
-  <!-- Rules Modal -->
+  
   <div id="rules-modal" class="modal hidden">
     <div class="modal-content">
       <button id="close-rules-btn" class="close-btn">&times;</button>
@@ -62,22 +62,22 @@
     </div>
   </div>
 
-  <!-- Leaderboard Modal -->
+  
   <div id="leaderboard-modal" class="modal hidden">
     <div class="modal-content">
       <button id="close-leaderboard-btn" class="close-btn">&times;</button>
       <h2>Leaderboard</h2>
       <div id="leaderboard-content" class="leaderboard-content">
-        <!-- Populated by JavaScript -->
+        
       </div>
     </div>
   </div>
 
-  <!-- Game Screen -->
+  
   <div id="game-screen" class="screen hidden">
     <div class="game-layout">
       
-      <!-- Left: Game Grid -->
+      
       <div class="grid-section">
         <div class="game-header">
           <div class="player-info">
@@ -95,14 +95,14 @@
         </div>
         
         <div id="grid-container" class="grid-container">
-          <!-- Grid populated by JavaScript -->
+          
         </div>
       </div>
 
-      <!-- Right: Info Panel -->
+      
       <div class="info-panel">
         
-        <!-- Current Card -->
+        
         <div class="card-section">
           <h3>Current Card</h3>
           <div id="card-display" class="card-display">
@@ -114,23 +114,23 @@
           </div>
         </div>
 
-        <!-- Round Info -->
+        
         <div class="round-section">
           <h3>Round <span id="round-number">1</span>/4</h3>
           <div id="round-order-display" class="round-order">
-            <!-- Populated by JavaScript -->
+            
           </div>
         </div>
 
-        <!-- Scoring Panel -->
+        
         <div class="scoring-section">
           <h3>Scoring</h3>
           <div id="score-display" class="score-display">
-            <!-- Populated by JavaScript -->
+            
           </div>
         </div>
 
-        <!-- Actions -->
+        
         <div class="game-actions">
           <button id="end-round-btn" class="btn btn-secondary hidden">End Round</button>
           <button id="back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
@@ -140,7 +140,7 @@
     </div>
   </div>
 
-  <!-- JavaScript Files (Load in order) -->
+  
   <script src="js/constants.js"></script>
   <script src="js/models/Station.js"></script>
   <script src="js/models/Card.js"></script>

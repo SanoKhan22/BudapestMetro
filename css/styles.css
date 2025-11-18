@@ -1,7 +1,7 @@
-/* Global Styles and CSS Variables */
+
 
 :root {
-  /* Colors */
+  
   --primary-purple: #5B2C6F;
   --primary-purple-light: #7B3C8F;
   --primary-purple-dark: #4B1C5F;
@@ -21,31 +21,31 @@
   --white: #ffffff;
   --black: #000000;
   
-  /* Spacing */
+  
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   
-  /* Border Radius */
+  
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   
-  /* Shadows */
+  
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
   
-  /* Transitions */
+  
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
 }
 
-/* Reset and Base Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -60,7 +60,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Screen Management */
+
 .screen {
   min-height: 100vh;
   display: flex;
@@ -73,7 +73,7 @@ body {
   display: none;
 }
 
-/* Buttons */
+
 .btn {
   padding: 12px 24px;
   font-size: 16px;
@@ -120,7 +120,7 @@ body {
   color: var(--white);
 }
 
-/* Modal Styles */
+
 .modal {
   position: fixed;
   top: 0;
@@ -194,7 +194,7 @@ body {
   margin-bottom: var(--spacing-xs);
 }
 
-/* Utility Classes */
+
 .hidden {
   display: none !important;
 }
@@ -211,7 +211,7 @@ body {
 .mb-md { margin-bottom: var(--spacing-md); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 
-/* Responsive Design */
+
 @media (max-width: 1200px) {
   .game-layout {
     flex-direction: column;

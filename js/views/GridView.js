@@ -1,24 +1,17 @@
-/* Grid View - Handles grid and station rendering */
+
 
 const GridView = (function() {
-  // Cache DOM elements
   let elements = {};
   let svgNamespace = 'http://www.w3.org/2000/svg';
   
-  /**
-   * Initialize and cache DOM elements
-   */
+  
   function initElements() {
     elements = {
       gridContainer: document.querySelector('#grid-container')
     };
   }
-  
-  // Public API
   return {
-    /**
-     * Initialize grid view
-     */
+    
     initialize() {
       initElements();
     },
@@ -29,15 +22,13 @@ const GridView = (function() {
      */
     renderGrid(stations) {
       if (!elements.gridContainer) return;
-      
-      // Create grid structure
       const gridHTML = `
+        <svg id="segments-svg" class="segment-line" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+        </svg>
         <div class="game-grid" id="game-grid">
           <div class="danube-river"></div>
           ${this.generateGridCells(stations)}
         </div>
-        <svg id="segments-svg" class="segment-line" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-        </svg>
       `;
       
       elements.gridContainer.innerHTML = gridHTML;
@@ -145,20 +136,17 @@ const GridView = (function() {
       const toStation = GameState.getStationById(toId);
       
       if (!fromStation || !toStation) return;
+      const fromStationEl = document.querySelector(`[data-station-id="${fromId}"]`);
+      const toStationEl = document.querySelector(`[data-station-id="${toId}"]`);
       
-      // Calculate positions (center of cells)
-      const grid = document.querySelector('#game-grid');
-      if (!grid) return;
-      
-      const gridRect = grid.getBoundingClientRect();
-      const cellSize = gridRect.width / CONSTANTS.GRID_SIZE;
-      
-      const x1 = (fromStation.x + 0.5) * cellSize;
-      const y1 = (fromStation.y + 0.5) * cellSize;
-      const x2 = (toStation.x + 0.5) * cellSize;
-      const y2 = (toStation.y + 0.5) * cellSize;
-      
-      // Create line element
+      if (!fromStationEl || !toStationEl) return;
+      const fromRect = fromStationEl.getBoundingClientRect();
+      const toRect = toStationEl.getBoundingClientRect();
+      const svgRect = svg.getBoundingClientRect();
+      const x1 = fromRect.left + fromRect.width / 2 - svgRect.left;
+      const y1 = fromRect.top + fromRect.height / 2 - svgRect.top;
+      const x2 = toRect.left + toRect.width / 2 - svgRect.left;
+      const y2 = toRect.top + toRect.height / 2 - svgRect.top;
       const line = document.createElementNS(svgNamespace, 'line');
       line.setAttribute('x1', x1);
       line.setAttribute('y1', y1);
@@ -176,7 +164,6 @@ const GridView = (function() {
      * @param {number[]} stationIds - Array of valid station IDs
      */
     highlightValidMoves(stationIds) {
-      // Clear previous highlights
       this.clearHighlights();
       
       stationIds.forEach(id => {
@@ -208,9 +195,7 @@ const GridView = (function() {
       }
     },
     
-    /**
-     * Clear all highlights
-     */
+    
     clearHighlights() {
       const cells = document.querySelectorAll('.grid-cell');
       cells.forEach(cell => {
@@ -240,12 +225,8 @@ const GridView = (function() {
     updateStationState(stationId, station) {
       const stationEl = document.querySelector(`[data-station-id="${stationId}"]`);
       if (!stationEl) return;
-      
-      // Remove old state classes
       stationEl.classList.remove('visited', 'visited-m1', 'visited-m2', 'visited-m3', 'visited-m4', 
                                  'endpoint', 'junction-2', 'junction-3', 'junction-4');
-      
-      // Add visited classes
       if (station.visitedBy.length > 0) {
         stationEl.classList.add('visited');
         station.visitedBy.forEach(lineId => {
@@ -253,8 +234,6 @@ const GridView = (function() {
           stationEl.classList.add(`visited-${lineName.toLowerCase()}`);
         });
       }
-      
-      // Add junction classes
       const visitorCount = station.getVisitorCount();
       if (visitorCount === 2) {
         stationEl.classList.add('junction-2');
@@ -270,11 +249,8 @@ const GridView = (function() {
      * @param {number[]} endpointIds
      */
     highlightEndpoints(endpointIds) {
-      // Remove old endpoint highlights
       const oldEndpoints = document.querySelectorAll('.station.endpoint');
       oldEndpoints.forEach(el => el.classList.remove('endpoint'));
-      
-      // Add new endpoint highlights
       endpointIds.forEach(id => {
         const stationEl = document.querySelector(`[data-station-id="${id}"]`);
         if (stationEl) {
@@ -299,8 +275,6 @@ const GridView = (function() {
     attachGridListeners(onStationClick) {
       const grid = document.querySelector('#game-grid');
       if (!grid) return;
-      
-      // Use event delegation for station clicks
       grid.addEventListener('click', (e) => {
         const stationEl = e.target.closest('.station');
         if (stationEl) {

@@ -1,12 +1,9 @@
-/* Game View - Game screen rendering and updates */
+
 
 const GameView = (function() {
-  // Cache DOM elements
   let elements = {};
   
-  /**
-   * Initialize and cache DOM elements
-   */
+  
   function initElements() {
     elements = {
       gameScreen: document.querySelector('#game-screen'),
@@ -23,28 +20,20 @@ const GameView = (function() {
       scoreDisplay: document.querySelector('#score-display')
     };
   }
-  
-  // Public API
   return {
-    /**
-     * Initialize game view
-     */
+    
     initialize() {
       initElements();
     },
     
-    /**
-     * Show game screen
-     */
+    
     showGame() {
       if (elements.gameScreen) {
         elements.gameScreen.classList.remove('hidden');
       }
     },
     
-    /**
-     * Hide game screen
-     */
+    
     hideGame() {
       if (elements.gameScreen) {
         elements.gameScreen.classList.add('hidden');

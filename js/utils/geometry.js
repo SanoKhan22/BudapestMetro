@@ -1,4 +1,4 @@
-/* Geometry Utility - Grid geometry and line math */
+
 
 const GeometryUtil = (function() {
   
@@ -97,7 +97,6 @@ const GeometryUtil = (function() {
    * @returns {boolean}
    */
   function pointOnLineSegment(point, lineStart, lineEnd) {
-    // Check if point is within bounding box
     const minX = Math.min(lineStart.x, lineEnd.x);
     const maxX = Math.max(lineStart.x, lineEnd.x);
     const minY = Math.min(lineStart.y, lineEnd.y);
@@ -106,12 +105,8 @@ const GeometryUtil = (function() {
     if (point.x < minX || point.x > maxX || point.y < minY || point.y > maxY) {
       return false;
     }
-    
-    // Calculate cross product to check collinearity
     const crossProduct = (point.y - lineStart.y) * (lineEnd.x - lineStart.x) -
                         (point.x - lineStart.x) * (lineEnd.y - lineStart.y);
-    
-    // If cross product is 0, points are collinear
     return Math.abs(crossProduct) < 0.0001;
   }
   
@@ -126,25 +121,17 @@ const GeometryUtil = (function() {
     const p2 = seg1.to;
     const p3 = seg2.from;
     const p4 = seg2.to;
-    
-    // Check if segments share an endpoint (allowed)
     if (p1.id === p3.id || p1.id === p4.id || p2.id === p3.id || p2.id === p4.id) {
       return false;
     }
-    
-    // Calculate direction of cross products
     const d1 = direction(p3, p4, p1);
     const d2 = direction(p3, p4, p2);
     const d3 = direction(p1, p2, p3);
     const d4 = direction(p1, p2, p4);
-    
-    // Segments intersect if they straddle each other
     if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
         ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))) {
       return true;
     }
-    
-    // Check for collinear cases
     if (d1 === 0 && onSegment(p3, p1, p4)) return true;
     if (d2 === 0 && onSegment(p3, p2, p4)) return true;
     if (d3 === 0 && onSegment(p1, p3, p2)) return true;
@@ -175,8 +162,6 @@ const GeometryUtil = (function() {
     return q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
            q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y);
   }
-  
-  // Public API
   return {
     getDistance,
     getManhattanDistance,

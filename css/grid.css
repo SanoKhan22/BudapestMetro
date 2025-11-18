@@ -1,4 +1,4 @@
-/* Grid and Station Styles */
+
 
 .grid-container {
   background: var(--white);
@@ -17,7 +17,7 @@
   position: relative;
 }
 
-/* Grid Cell */
+
 .grid-cell {
   aspect-ratio: 1;
   display: flex;
@@ -56,7 +56,7 @@
   cursor: not-allowed;
 }
 
-/* Station Styles */
+
 .station {
   width: 80%;
   height: 80%;
@@ -80,7 +80,7 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Starting Stations */
+
 .station.start-m1 {
   background: var(--metro-m1);
   color: var(--black);
@@ -101,7 +101,7 @@
   color: var(--white);
 }
 
-/* Joker Station */
+
 .station.joker {
   background: var(--black);
   color: var(--white);
@@ -120,7 +120,7 @@
   font-weight: normal;
 }
 
-/* Train Station Icon */
+
 .train-icon {
   position: absolute;
   bottom: -6px;
@@ -138,7 +138,7 @@
   z-index: 3;
 }
 
-/* Danube River */
+
 .danube-river {
   position: absolute;
   left: 50%;
@@ -156,7 +156,7 @@
   border-right: 2px dashed rgba(74, 144, 226, 0.5);
 }
 
-/* Segment Lines */
+
 .segment-line {
   position: absolute;
   pointer-events: none;
@@ -169,13 +169,13 @@
   stroke-linecap: round;
 }
 
-/* Segment Colors */
+
 .segment-m1 { stroke: var(--metro-m1); }
 .segment-m2 { stroke: var(--metro-m2); }
 .segment-m3 { stroke: var(--metro-m3); }
 .segment-m4 { stroke: var(--metro-m4); }
 
-/* Visited Stations */
+
 .station.visited {
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
@@ -196,7 +196,7 @@
   box-shadow: 0 0 0 3px var(--metro-m4);
 }
 
-/* Junction Indicators */
+
 .station.junction-2 {
   box-shadow: 0 0 0 4px rgba(91, 44, 111, 0.5);
 }
@@ -219,7 +219,7 @@
   }
 }
 
-/* Endpoint Indicators */
+
 .station.endpoint {
   animation: glow 1.5s ease-in-out infinite;
 }
@@ -233,7 +233,7 @@
   }
 }
 
-/* Heavy Traffic Station (Abilities Mode) */
+
 .station.heavy-traffic::before {
   content: '2×';
   position: absolute;
@@ -248,7 +248,7 @@
   z-index: 4;
 }
 
-/* Responsive Grid */
+
 @media (max-width: 768px) {
   .game-grid {
     gap: 4px;

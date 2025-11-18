@@ -1,4 +1,4 @@
-/* Scoring Utility - Score calculations */
+
 
 const ScoringUtil = (function() {
   
@@ -131,8 +131,6 @@ const ScoringUtil = (function() {
       junctionPoints
     };
   }
-  
-  // Public API
   return {
     calculateDistrictsCovered,
     calculateMaxStationsInDistrict,

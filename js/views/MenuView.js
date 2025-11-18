@@ -1,12 +1,9 @@
-/* Menu View - Handles menu screen rendering and interactions */
+
 
 const MenuView = (function() {
-  // Cache DOM elements
   let elements = {};
   
-  /**
-   * Initialize and cache DOM elements
-   */
+  
   function initElements() {
     elements = {
       menuScreen: document.querySelector('#menu-screen'),
@@ -21,35 +18,25 @@ const MenuView = (function() {
       leaderboardContent: document.querySelector('#leaderboard-content')
     };
   }
-  
-  // Public API
   return {
-    /**
-     * Initialize menu view
-     */
+    
     initialize() {
       initElements();
     },
     
-    /**
-     * Render menu screen
-     */
+    
     render() {
       this.showMenu();
     },
     
-    /**
-     * Show menu screen
-     */
+    
     showMenu() {
       if (elements.menuScreen) {
         elements.menuScreen.classList.remove('hidden');
       }
     },
     
-    /**
-     * Hide menu screen
-     */
+    
     hideMenu() {
       if (elements.menuScreen) {
         elements.menuScreen.classList.add('hidden');
@@ -65,45 +52,35 @@ const MenuView = (function() {
       return name || 'Player';
     },
     
-    /**
-     * Clear player name input
-     */
+    
     clearPlayerName() {
       if (elements.playerNameInput) {
         elements.playerNameInput.value = '';
       }
     },
     
-    /**
-     * Show rules modal
-     */
+    
     showRulesModal() {
       if (elements.rulesModal) {
         elements.rulesModal.classList.remove('hidden');
       }
     },
     
-    /**
-     * Hide rules modal
-     */
+    
     hideRulesModal() {
       if (elements.rulesModal) {
         elements.rulesModal.classList.add('hidden');
       }
     },
     
-    /**
-     * Show leaderboard modal
-     */
+    
     showLeaderboardModal() {
       if (elements.leaderboardModal) {
         elements.leaderboardModal.classList.remove('hidden');
       }
     },
     
-    /**
-     * Hide leaderboard modal
-     */
+    
     hideLeaderboardModal() {
       if (elements.leaderboardModal) {
         elements.leaderboardModal.classList.add('hidden');
@@ -191,32 +168,21 @@ const MenuView = (function() {
      * @param {Object} handlers - Object with handler functions
      */
     attachEventListeners(handlers) {
-      // Start game button
       if (elements.startGameBtn && handlers.onStartGame) {
         elements.startGameBtn.addEventListener('click', handlers.onStartGame);
       }
-      
-      // Rules button
       if (elements.rulesBtn && handlers.onShowRules) {
         elements.rulesBtn.addEventListener('click', handlers.onShowRules);
       }
-      
-      // Close rules button
       if (elements.closeRulesBtn && handlers.onCloseRules) {
         elements.closeRulesBtn.addEventListener('click', handlers.onCloseRules);
       }
-      
-      // Leaderboard button
       if (elements.leaderboardBtn && handlers.onShowLeaderboard) {
         elements.leaderboardBtn.addEventListener('click', handlers.onShowLeaderboard);
       }
-      
-      // Close leaderboard button
       if (elements.closeLeaderboardBtn && handlers.onCloseLeaderboard) {
         elements.closeLeaderboardBtn.addEventListener('click', handlers.onCloseLeaderboard);
       }
-      
-      // Close modals on background click
       if (elements.rulesModal && handlers.onCloseRules) {
         elements.rulesModal.addEventListener('click', (e) => {
           if (e.target === elements.rulesModal) {
@@ -232,8 +198,6 @@ const MenuView = (function() {
           }
         });
       }
-      
-      // Enter key on name input
       if (elements.playerNameInput && handlers.onStartGame) {
         elements.playerNameInput.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {

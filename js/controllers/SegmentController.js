@@ -1,7 +1,6 @@
-/* Segment Controller - Segment building logic */
+
 
 const SegmentController = (function() {
-  // Private state
   let selectedFromStation = null;
   
   /**
@@ -17,10 +16,8 @@ const SegmentController = (function() {
     }
     
     if (selectedFromStation === null) {
-      // First click - select starting station
       selectFromStation(stationId);
     } else {
-      // Second click - attempt to build segment
       selectToStation(stationId);
     }
   }
@@ -32,8 +29,6 @@ const SegmentController = (function() {
   function selectFromStation(stationId) {
     const currentLine = GameState.getCurrentLine();
     if (!currentLine) return;
-    
-    // Check if station is an endpoint or if switch is active
     const isEndpoint = currentLine.isEndpoint(stationId);
     const isSwitchActive = GameState.isSwitchActive();
     const isVisited = currentLine.hasVisited(stationId);
@@ -47,8 +42,6 @@ const SegmentController = (function() {
       console.log('Station not part of current line');
       return;
     }
-    
-    // Valid starting point
     selectedFromStation = stationId;
     GridView.selectStation(stationId);
     GridView.clearHighlights();
@@ -63,12 +56,9 @@ const SegmentController = (function() {
    */
   function selectToStation(stationId) {
     if (selectedFromStation === stationId) {
-      // Clicked same station - deselect
       cancelSelection();
       return;
     }
-    
-    // Attempt to build segment
     attemptBuildSegment(selectedFromStation, stationId);
   }
   
@@ -86,8 +76,6 @@ const SegmentController = (function() {
       console.log('Invalid segment:', validation.errors);
       GridView.highlightInvalidMove(fromId, toId);
     }
-    
-    // Reset selection
     cancelSelection();
   }
   
@@ -99,32 +87,20 @@ const SegmentController = (function() {
   function buildSegment(fromId, toId) {
     const currentLine = GameState.getCurrentLine();
     if (!currentLine) return;
-    
-    // Add segment to game state
     GameState.addSegment(fromId, toId);
-    
-    // Render segment
     GridView.renderSegment(fromId, toId, currentLine.color, currentLine.name);
-    
-    // Update station states
     const fromStation = GameState.getStationById(fromId);
     const toStation = GameState.getStationById(toId);
     
     if (fromStation) GridView.updateStationState(fromId, fromStation);
     if (toStation) GridView.updateStationState(toId, toStation);
-    
-    // Highlight new endpoints
     GridView.highlightEndpoints(currentLine.getEndpoints());
-    
-    // Reset switch active state
     GameState.setSwitchActive(false);
     
     console.log('Segment built:', fromId, '->', toId);
   }
   
-  /**
-   * Cancel current selection
-   */
+  
   function cancelSelection() {
     selectedFromStation = null;
     GridView.clearHighlights();
@@ -151,8 +127,6 @@ const SegmentController = (function() {
     
     return validTargets;
   }
-  
-  // Public API
   return {
     handleStationClick,
     selectFromStation,

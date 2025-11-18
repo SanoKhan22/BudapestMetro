@@ -1,4 +1,4 @@
-/* Station Model */
+
 
 class Station {
   constructor(data) {

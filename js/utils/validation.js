@@ -1,4 +1,4 @@
-/* Validation Utility - Segment validation rules */
+
 
 const ValidationUtil = (function() {
   
@@ -19,38 +19,24 @@ const ValidationUtil = (function() {
       errors.push('Invalid station IDs');
       return { valid: false, errors };
     }
-    
-    // Check if valid start point
     if (!isValidStartPoint(gameState, fromId)) {
       errors.push('Must start from line endpoint');
     }
-    
-    // Check if matches card type
     if (!matchesCardType(gameState, toId)) {
       errors.push('Station type does not match card');
     }
-    
-    // Check angle (90° or 45°)
     if (!isValidAngle(fromStation, toStation)) {
       errors.push('Segment must be at 90° or 45° angle');
     }
-    
-    // Check for pass-through stations
     if (passesThroughStation(fromStation, toStation, gameState.getAllStations())) {
       errors.push('Segment cannot pass through other stations');
     }
-    
-    // Check for intersections
     if (intersectsExistingSegment(fromStation, toStation, gameState)) {
       errors.push('Segment cannot intersect existing segments');
     }
-    
-    // Check for parallel segments
     if (isParallelSegment(fromId, toId, gameState)) {
       errors.push('Parallel segments not allowed');
     }
-    
-    // Check for loops
     if (createsLoop(gameState, toId)) {
       errors.push('Cannot revisit station on same line');
     }
@@ -70,13 +56,9 @@ const ValidationUtil = (function() {
   function isValidStartPoint(gameState, stationId) {
     const currentLine = gameState.getCurrentLine();
     if (!currentLine) return false;
-    
-    // If switch is active, can start from any visited station
     if (gameState.isSwitchActive()) {
       return currentLine.hasVisited(stationId);
     }
-    
-    // Otherwise, must be an endpoint
     return currentLine.isEndpoint(stationId);
   }
   
@@ -160,7 +142,6 @@ const ValidationUtil = (function() {
     
     for (const line of allLines) {
       for (const segment of line.segments) {
-        // Check both directions
         if ((segment.from === fromId && segment.to === toId) ||
             (segment.from === toId && segment.to === fromId)) {
           return true;
@@ -183,8 +164,6 @@ const ValidationUtil = (function() {
     
     return currentLine.hasVisited(toStationId);
   }
-  
-  // Public API
   return {
     validateSegment,
     isValidStartPoint,

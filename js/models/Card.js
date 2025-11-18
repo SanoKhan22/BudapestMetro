@@ -1,4 +1,4 @@
-/* Card Model */
+
 
 class Card {
   constructor(type, platformType) {

@@ -1,4 +1,4 @@
-/* Game Screen Layout */
+
 
 #game-screen {
   padding: var(--spacing-md);
@@ -14,7 +14,7 @@
   margin: 0 auto;
 }
 
-/* Grid Section */
+
 .grid-section {
   background: var(--bg-medium);
   border-radius: var(--radius-lg);
@@ -60,7 +60,7 @@
   font-weight: bold;
 }
 
-/* Info Panel */
+
 .info-panel {
   display: flex;
   flex-direction: column;
@@ -85,7 +85,7 @@
   font-weight: 600;
 }
 
-/* Card Display */
+
 .card-display {
   min-height: 140px;
   display: flex;
@@ -195,7 +195,7 @@
   flex: 1;
 }
 
-/* Round Section */
+
 .round-order {
   display: flex;
   gap: var(--spacing-sm);
@@ -224,11 +224,27 @@
   opacity: 0.5;
 }
 
-/* Scoring Section */
+
 .score-display {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+}
+
+.score-placeholder {
+  color: var(--text-light);
+  font-style: italic;
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.score-section-title {
+  font-weight: 600;
+  color: var(--primary-purple);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
 .score-item {
@@ -256,6 +272,7 @@
   color: var(--white);
   font-size: 18px;
   font-weight: bold;
+  margin-top: var(--spacing-xs);
 }
 
 .score-item.total .label,
@@ -263,14 +280,14 @@
   color: var(--white);
 }
 
-/* Game Actions */
+
 .game-actions {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
 }
 
-/* Responsive Game Layout */
+
 @media (max-width: 1200px) {
   .game-layout {
     grid-template-columns: 1fr;
