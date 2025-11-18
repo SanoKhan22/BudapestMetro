@@ -15,11 +15,11 @@ A metro line building game where players connect stations according to specific 
 
 ## 📸 **Live Demo**
 
-### Main Menu
-![Main Menu](assets/screenshots/main-menu.png)
+### Game Start Screen
+![Game Start](assets/screenshots/StartGame_metroBp.gif)
 
-### Game Interface  
-![Game Screen](assets/screenshots/game-screen.png)
+### Main Menu Interface  
+![Main Menu](assets/screenshots/menu_metrobudapest.gif)
 
 **🚀 [Play Live Demo](https://sanokhan22.github.io/BudapestMetro/)**
 
